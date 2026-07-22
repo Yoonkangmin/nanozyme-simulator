@@ -7,20 +7,20 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * { box-sizing: border-box; font-family: 'Pretendard', system-ui, -apple-system, sans-serif; }
-        body { background: #0f172a; color: #f8fafc; margin: 0; padding: 25px; line-height: 1.6; }
-        h1 { text-align: center; color: #38bdf8; font-size: 1.9rem; margin-bottom: 6px; font-weight: 700; }
-        .subtitle { text-align: center; color: #94a3b8; font-size: 0.95rem; margin-bottom: 30px; }
-        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1250px; margin: 0 auto; }
-        .card { background: #1e293b; border-radius: 14px; padding: 22px; border: 1px solid #334155; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3); }
-        .card h2 { color: #f1f5f9; font-size: 1.2rem; margin-top: 0; border-bottom: 2px solid #38bdf8; padding-bottom: 10px; margin-bottom: 15px; }
+        body { background: #0f172a; color: #f8fafc; margin: 0; padding: 20px; line-height: 1.6; }
+        h1 { text-align: center; color: #38bdf8; font-size: 1.8rem; margin-bottom: 6px; font-weight: 700; }
+        .subtitle { text-align: center; color: #94a3b8; font-size: 0.95rem; margin-bottom: 25px; }
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1200px; margin: 0 auto; }
+        .card { background: #1e293b; border-radius: 14px; padding: 20px; border: 1px solid #334155; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3); }
+        .card h2 { color: #f1f5f9; font-size: 1.15rem; margin-top: 0; border-bottom: 2px solid #38bdf8; padding-bottom: 10px; margin-bottom: 15px; }
         canvas { background: #090d16; border-radius: 10px; width: 100%; display: block; }
         .controls { margin-top: 15px; display: flex; gap: 15px; align-items: center; background: #0f172a; padding: 10px 15px; border-radius: 8px; }
         label { font-size: 0.9rem; color: #cbd5e1; font-weight: 600; }
         input[type=range] { flex: 1; accent-color: #38bdf8; cursor: pointer; }
         .full-width { grid-column: span 2; }
-        .desc-box { background: #0f172a; padding: 16px; border-radius: 8px; font-size: 0.9rem; color: #cbd5e1; margin-top: 15px; border-left: 4px solid #38bdf8; }
+        .desc-box { background: #0f172a; padding: 15px; border-radius: 8px; font-size: 0.88rem; color: #cbd5e1; margin-top: 15px; border-left: 4px solid #38bdf8; }
         .desc-box h4 { margin: 0 0 8px 0; color: #38bdf8; font-size: 0.95rem; }
-        .desc-box ul { margin: 6px 0 0 0; padding-left: 20px; }
+        .desc-box ul { margin: 6px 0 0 0; padding-left: 18px; }
         .desc-box li { margin-bottom: 4px; }
         .highlight { color: #38bdf8; font-weight: bold; }
         .highlight-red { color: #f87171; font-weight: bold; }
@@ -28,6 +28,11 @@
         .highlight-purple { color: #c084fc; font-weight: bold; }
         .btn { background: #0284c7; color: white; border: none; padding: 7px 15px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: 0.2s; }
         .btn:hover { background: #0369a1; }
+        
+        @media (max-width: 850px) {
+            .grid-container { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+        }
     </style>
 </head>
 <body>
@@ -39,7 +44,7 @@
         
         <div class="card">
             <h2>1. 미세플라스틱의 혈관 및 BBB 장벽 통과 모의실험</h2>
-            <canvas id="bbbCanvas" height="230"></canvas>
+            <canvas id="bbbCanvas" width="500" height="220"></canvas>
             <div class="controls">
                 <label>입자 농도:</label>
                 <input type="range" id="particleSlider" min="10" max="60" value="25">
@@ -48,16 +53,16 @@
             <div class="desc-box">
                 <h4>🔬 모의실험 작동 원리 및 구체적 설명</h4>
                 <ul>
-                    <li><b>혈류 유입 (좌측):</b> 소화관을 통해 유입된 미세·나노플라스틱(<span class="highlight">노란색 입자</span>)이 전신 혈관을 타고 순환합니다.</li>
-                    <li><b>BBB 통과 (중앙):</b> 뇌-혈관 장벽(BBB 내피세포)을 통과한 입자가 뇌 조직으로 침투합니다.</li>
-                    <li><b>독성 유발 (우측):</b> 뇌 세포 내에 축적된 나노플라스틱은 미토콘드리아 손상을 유발하고 <span class="highlight-red">ROS(활성산소종, 빨간색 요동치는 입자)</span>를 급증시켜 산화 스트레스와 신경 염증을 일으킵니다.</li>
+                    <li><b>혈류 유입 (좌측):</b> 미세·나노플라스틱(<span class="highlight">노란색 입자</span>)이 혈관을 타고 이동합니다.</li>
+                    <li><b>BBB 통과 (중앙):</b> 뇌-혈관 장벽(BBB 내피세포)을 통과하여 뇌 조직으로 침투합니다.</li>
+                    <li><b>독성 유발 (우측):</b> 축적된 입자는 미토콘드리아 손상 및 <span class="highlight-red">ROS(활성산소종, 빨간색 입자)</span>를 급증시킵니다.</li>
                 </ul>
             </div>
         </div>
 
         <div class="card">
             <h2>2. 온도의 변성에 따른 촉매 활성도 실시간 비교 (PETase vs Nanozyme)</h2>
-            <div style="height: 230px; position: relative;">
+            <div style="height: 220px; position: relative;">
                 <canvas id="tempChart"></canvas>
             </div>
             <div class="controls">
@@ -67,22 +72,21 @@
             <div class="desc-box">
                 <h4>🔬 그래프 작동 원리 및 구체적 설명</h4>
                 <ul>
-                    <li><b>천연 PETase 효소 (<span class="highlight-red">빨간선</span>):</b> 체온 범위(37℃)에서 최고 활성을 보이지만, 단백질 3차 구조 변성으로 인해 45℃ 이상에서는 활성이 급격히 파괴(0%)됩니다.</li>
-                    <li><b>생체모방 나노자임 (<span class="highlight">파란선</span>):</b> 무기 골격(M-N4) 기반 구조로 열역학적 안정성이 극대화되어 90℃의 고온 환경에서도 높은 분해 활성을 유지합니다.</li>
-                    <li><b>동적 포인트 펄스:</b> 온도를 조절할 때마다 두 촉매의 실시간 활성 수치가 포인트로 표시되며 맥동 애니메이션이 작동합니다.</li>
+                    <li><b>천연 PETase 효소 (<span class="highlight-red">빨간선</span>):</b> 45℃ 이상에서 단백질 3차 구조 변성으로 활성 파괴(0%).</li>
+                    <li><b>생체모방 나노자임 (<span class="highlight">파란선</span>):</b> 무기 골격 기반으로 90℃ 고온에서도 높은 활성 유지.</li>
                 </ul>
             </div>
         </div>
 
         <div class="card full-width">
             <h2>3. 차세대 나노자임(M-N4 SAC + 초분자 포켓)의 에스터 결합 선택적 분해 메커니즘</h2>
-            <canvas id="mechCanvas" height="200"></canvas>
+            <canvas id="mechCanvas" width="800" height="260"></canvas>
             <div class="desc-box">
                 <h4>🔬 분해 메커니즘 단계별 구체적 설명</h4>
                 <ul>
-                    <li><b>1단계 - 초분자 포켓 인식 (<span class="highlight-purple">보라색 영역</span>):</b> 클릭 화학(CuAAC)으로 정밀 접합된 호스트 분자(Cyclodextrin)가 소수성 상호작용 및 π-π 적층 작용으로 PET 고분자의 방향족 고리만을 선택적으로 포집합니다.</li>
-                    <li><b>2단계 - 단일원자 촉매 결합 (<span class="highlight">주황색 M-N4 중심</span>):</b> 비어있는 d-오비탈을 가진 전이금속 단일원자(Pt/Co)가 PET의 에스터 결합(C=O 탄소)에 배위결합하여 활성화 에너지를 낮춥니다.</li>
-                    <li><b>3단계 - 가수분해 절단 (<span class="highlight-green">초록/빨간색 절단 효과</span>):</b> 물 분자의 친핵성 공격을 유도하여 에스터 결합을 끊어내고 무독성 친환경 부산물(TPA 및 EG)로 분해합니다. (실시간 입자 흐름 반영)</li>
+                    <li><b>1단계 - 초분자 포켓 인식 (<span class="highlight-purple">보라색 영역</span>):</b> 클릭 화학 기반 호스트 포켓이 PET의 방향족 고리를 포집.</li>
+                    <li><b>2단계 - 단일원자 촉매 결합 (<span class="highlight">주황색 M-N4 중심</span>):</b> 비어있는 d-오비탈 전이금속(Pt/Co)이 C=O 에스터 결합에 배위결합하여 활성화 에너지를 낮춤.</li>
+                    <li><b>3단계 - 가수분해 절단 (<span class="highlight-green">초록/빨간색 절단 효과</span>):</b> 친핵성 공격으로 에스터 결합을 끊어내고 무독성 부산물(<span class="highlight">하늘색 TPA/EG 입자</span>)을 방출.</li>
                 </ul>
             </div>
         </div>
@@ -90,205 +94,229 @@
     </div>
 
     <script>
-        // --- 1. BBB 모의실험 캔버스 ---
-        const bbbCanvas = document.getElementById('bbbCanvas');
-        const bbbCtx = bbbCanvas.getContext('2d');
-        let particles = [];
-        
-        function initParticles(count) {
-            particles = [];
-            for(let i=0; i<count; i++) {
-                particles.push({
-                    x: Math.random() * 120,
-                    y: 30 + Math.random() * (bbbCanvas.height - 50),
-                    vx: 0.8 + Math.random() * 0.8,
-                    vy: (Math.random() - 0.5) * 0.6,
-                    passed: false,
-                    isROS: false,
-                    pulse: Math.random() * Math.PI
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // --- 1. BBB 모의실험 캔버스 ---
+            const bbbCanvas = document.getElementById('bbbCanvas');
+            if(bbbCanvas) {
+                const bbbCtx = bbbCanvas.getContext('2d');
+                let particles = [];
+                
+                function initParticles(count) {
+                    particles = [];
+                    for(let i=0; i<count; i++) {
+                        particles.push({
+                            x: Math.random() * 120,
+                            y: 30 + Math.random() * (bbbCanvas.height - 50),
+                            vx: 0.8 + Math.random() * 0.8,
+                            vy: (Math.random() - 0.5) * 0.6,
+                            passed: false,
+                            isROS: false,
+                            pulse: Math.random() * Math.PI
+                        });
+                    }
+                }
+
+                function drawBBB() {
+                    bbbCtx.clearRect(0, 0, bbbCanvas.width, bbbCanvas.height);
+                    
+                    bbbCtx.fillStyle = '#1e1b4b'; bbbCtx.fillRect(0, 0, 160, bbbCanvas.height);
+                    bbbCtx.fillStyle = '#065f46'; bbbCtx.fillRect(160, 0, 30, bbbCanvas.height);
+                    bbbCtx.fillStyle = '#31101d'; bbbCtx.fillRect(190, 0, bbbCanvas.width - 190, bbbCanvas.height);
+
+                    bbbCtx.fillStyle = '#93c5fd'; bbbCtx.font = 'bold 12px sans-serif';
+                    bbbCtx.fillText('혈류 (Blood)', 20, 25);
+                    bbbCtx.fillStyle = '#6ee7b7';
+                    bbbCtx.fillText('BBB 장벽', 150, 25);
+                    bbbCtx.fillStyle = '#fca5a5';
+                    bbbCtx.fillText('뇌 조직 (Brain)', 220, 25);
+
+                    particles.forEach(p => {
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        p.pulse += 0.08;
+
+                        if(!p.passed && p.x > 160 && p.x < 190) {
+                            if(Math.random() < 0.55) { p.passed = true; } 
+                            else { p.vx = -p.vx; }
+                        }
+
+                        if(p.passed && p.x > 220 && Math.random() < 0.08) { p.isROS = true; }
+
+                        bbbCtx.beginPath();
+                        let r = p.isROS ? 4 + Math.sin(p.pulse) * 1.5 : 4.5;
+                        bbbCtx.arc(p.x, p.y, r, 0, Math.PI * 2);
+                        bbbCtx.fillStyle = p.isROS ? '#ef4444' : '#facc15';
+                        bbbCtx.fill();
+
+                        if(p.x > bbbCanvas.width || p.x < 0) {
+                            p.x = 10; p.passed = false; p.isROS = false; p.vx = Math.abs(p.vx);
+                        }
+                    });
+
+                    requestAnimationFrame(drawBBB);
+                }
+
+                document.getElementById('particleSlider').addEventListener('input', (e) => initParticles(e.target.value));
+                document.getElementById('resetParticleBtn').addEventListener('click', () => initParticles(document.getElementById('particleSlider').value));
+                initParticles(25);
+                drawBBB();
+            }
+
+            // --- 2. Chart.js 애니메이션 그래프 ---
+            const tempCanvas = document.getElementById('tempChart');
+            if(tempCanvas && typeof Chart !== 'undefined') {
+                const tempCtx = tempCanvas.getContext('2d');
+                const temps = [20, 30, 37, 45, 55, 65, 75, 85, 90];
+                const petaseData = [40, 85, 100, 35, 5, 0, 0, 0, 0];
+                const nanozymeData = [50, 75, 90, 95, 98, 100, 99, 97, 95];
+
+                const tempChart = new Chart(tempCtx, {
+                    type: 'line',
+                    data: {
+                        labels: temps.map(t => t + '°C'),
+                        datasets: [
+                            {
+                                label: '천연 PETase 효소 활성도 (%)',
+                                data: petaseData,
+                                borderColor: '#ef4444',
+                                backgroundColor: 'rgba(239, 68, 68, 0.15)',
+                                fill: true,
+                                tension: 0.35,
+                                pointRadius: 5
+                            },
+                            {
+                                label: '생체모방 나노자임(Nanozyme) 활성도 (%)',
+                                data: nanozymeData,
+                                borderColor: '#38bdf8',
+                                backgroundColor: 'rgba(56, 189, 248, 0.15)',
+                                fill: true,
+                                tension: 0.35,
+                                pointRadius: 5
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: { min: 0, max: 110, grid: { color: '#334155' }, ticks: { color: '#cbd5e1' } },
+                            x: { grid: { color: '#334155' }, ticks: { color: '#cbd5e1' } }
+                        },
+                        plugins: { legend: { labels: { color: '#f8fafc', font: { size: 12 } } } }
+                    }
+                });
+
+                document.getElementById('tempSlider').addEventListener('input', (e) => {
+                    const val = parseInt(e.target.value);
+                    document.getElementById('tempVal').innerText = val;
+                    const closestIdx = temps.reduce((prev, curr, idx) => Math.abs(curr - val) < Math.abs(temps[prev] - val) ? idx : prev, 0);
+                    tempChart.data.datasets[0].pointRadius = temps.map((_, i) => i === closestIdx ? 10 : 4);
+                    tempChart.data.datasets[1].pointRadius = temps.map((_, i) => i === closestIdx ? 10 : 4);
+                    tempChart.update('none');
                 });
             }
-        }
 
-        function drawBBB() {
-            bbbCtx.clearRect(0, 0, bbbCanvas.width, bbbCanvas.height);
-            
-            // 영역 구분 배경
-            bbbCtx.fillStyle = '#1e1b4b'; bbbCtx.fillRect(0, 0, 140, bbbCanvas.height);
-            bbbCtx.fillStyle = '#065f46'; bbbCtx.fillRect(140, 0, 24, bbbCanvas.height);
-            bbbCtx.fillStyle = '#31101d'; bbbCtx.fillRect(164, 0, bbbCanvas.width - 164, bbbCanvas.height);
+            // --- 3. 모듈 3: 메커니즘 완전 교정 캔버스 ---
+            const mechCanvas = document.getElementById('mechCanvas');
+            if(mechCanvas) {
+                const mechCtx = mechCanvas.getContext('2d');
+                let mechTime = 0;
 
-            // 라벨 표시
-            bbbCtx.fillStyle = '#93c5fd'; bbbCtx.font = 'bold 11px sans-serif';
-            bbbCtx.fillText('혈류 (Blood)', 15, 20);
-            bbbCtx.fillStyle = '#6ee7b7';
-            bbbCtx.fillText('BBB 장벽', 132, 20);
-            bbbCtx.fillStyle = '#fca5a5';
-            bbbCtx.fillText('뇌 조직 (Brain)', 180, 20);
+                function drawMechanism() {
+                    mechTime += 0.04;
+                    
+                    const w = mechCanvas.width;
+                    const h = mechCanvas.height;
+                    mechCtx.clearRect(0, 0, w, h);
 
-            particles.forEach(p => {
-                p.x += p.vx;
-                p.y += p.vy;
-                p.pulse += 0.08;
+                    const cy = h / 2 + 10;
 
-                // BBB 통과 확률
-                if(!p.passed && p.x > 140 && p.x < 164) {
-                    if(Math.random() < 0.55) { p.passed = true; } 
-                    else { p.vx = -p.vx; }
-                }
+                    // 1. 초분자 인식 포켓 (좌측 배치: 보라색)
+                    const pocketX = 140;
+                    mechCtx.strokeStyle = '#c084fc'; 
+                    mechCtx.lineWidth = 5;
+                    mechCtx.beginPath();
+                    mechCtx.arc(pocketX, cy, 50, 0.4 * Math.PI, 1.6 * Math.PI);
+                    mechCtx.stroke();
+                    
+                    mechCtx.fillStyle = '#c084fc'; 
+                    mechCtx.font = 'bold 13px sans-serif';
+                    mechCtx.fillText('초분자 인식 포켓 (Host-Guest)', 30, 30);
 
-                // 뇌 영역 진입 후 ROS 유발
-                if(p.passed && p.x > 200 && Math.random() < 0.08) { p.isROS = true; }
+                    // 2. 클릭 화학 링커 (중앙 파란선)
+                    const linkerX = pocketX + 50;
+                    mechCtx.fillStyle = '#38bdf8'; 
+                    mechCtx.fillRect(linkerX, cy - 5, 70, 10);
+                    mechCtx.fillStyle = '#93c5fd'; 
+                    mechCtx.font = '11px sans-serif';
+                    mechCtx.fillText('Triazole Linker', linkerX + 5, cy - 12);
 
-                bbbCtx.beginPath();
-                let r = p.isROS ? 3.5 + Math.sin(p.pulse) * 1.5 : 4;
-                bbbCtx.arc(p.x, p.y, r, 0, Math.PI * 2);
-                bbbCtx.fillStyle = p.isROS ? '#ef4444' : '#facc15';
-                bbbCtx.shadowBlur = p.isROS ? 8 : 0;
-                bbbCtx.shadowColor = '#ef4444';
-                bbbCtx.fill();
-                bbbCtx.shadowBlur = 0;
+                    // 3. 단일원자 촉매 중심 (M-N4 주황색 원 및 반짝임 효과)
+                    const metalX = linkerX + 100;
+                    let pulseR = 20 + Math.sin(mechTime * 3) * 3;
+                    
+                    // 후광 글로우 효과
+                    mechCtx.beginPath();
+                    mechCtx.arc(metalX, cy, pulseR + 8, 0, Math.PI * 2);
+                    mechCtx.fillStyle = 'rgba(245, 158, 11, 0.25)';
+                    mechCtx.fill();
 
-                if(p.x > bbbCanvas.width || p.x < 0) {
-                    p.x = 10; p.passed = false; p.isROS = false; p.vx = Math.abs(p.vx);
-                }
-            });
+                    // 중심 원
+                    mechCtx.beginPath();
+                    mechCtx.arc(metalX, cy, pulseR, 0, Math.PI * 2);
+                    mechCtx.fillStyle = '#f59e0b';
+                    mechCtx.fill();
+                    
+                    mechCtx.fillStyle = '#000'; 
+                    mechCtx.font = 'bold 11px sans-serif';
+                    mechCtx.fillText('M-N4 SAC', metalX - 25, cy + 4);
 
-            requestAnimationFrame(drawBBB);
-        }
+                    // 4. PET 고분자 및 절단 반응 (우측 초록선)
+                    let moveX = Math.sin(mechTime * 1.5) * 15;
+                    let petStartX = metalX + 50 + moveX;
+                    
+                    mechCtx.strokeStyle = '#4ade80'; 
+                    mechCtx.lineWidth = 5;
+                    mechCtx.beginPath();
+                    mechCtx.moveTo(petStartX, cy);
+                    mechCtx.lineTo(petStartX + 180, cy);
+                    mechCtx.stroke();
 
-        document.getElementById('particleSlider').addEventListener('input', (e) => initParticles(e.target.value));
-        document.getElementById('resetParticleBtn').addEventListener('click', () => initParticles(document.getElementById('particleSlider').value));
-        initParticles(25);
-        drawBBB();
+                    // 에스터 결합 절단 부위 (빨간색 번개 표시)
+                    let cutX = petStartX + 80;
+                    mechCtx.strokeStyle = '#ef4444'; 
+                    mechCtx.lineWidth = 3;
+                    mechCtx.beginPath();
+                    mechCtx.moveTo(cutX - 6, cy - 20);
+                    mechCtx.lineTo(cutX + 6, cy + 20);
+                    mechCtx.stroke();
 
-        // --- 2. Chart.js 애니메이션 그래프 ---
-        const tempCtx = document.getElementById('tempChart').getContext('2d');
-        const temps = [20, 30, 37, 45, 55, 65, 75, 85, 90];
-        const petaseData = [40, 85, 100, 35, 5, 0, 0, 0, 0];
-        const nanozymeData = [50, 75, 90, 95, 98, 100, 99, 97, 95];
-
-        const tempChart = new Chart(tempCtx, {
-            type: 'line',
-            data: {
-                labels: temps.map(t => t + '°C'),
-                datasets: [
-                    {
-                        label: '천연 PETase 효소 활성도 (%)',
-                        data: petaseData,
-                        borderColor: '#ef4444',
-                        backgroundColor: 'rgba(239, 68, 68, 0.15)',
-                        fill: true,
-                        tension: 0.35,
-                        pointRadius: 5,
-                        pointHoverRadius: 8
-                    },
-                    {
-                        label: '생체모방 나노자임(Nanozyme) 활성도 (%)',
-                        data: nanozymeData,
-                        borderColor: '#38bdf8',
-                        backgroundColor: 'rgba(56, 189, 248, 0.15)',
-                        fill: true,
-                        tension: 0.35,
-                        pointRadius: 5,
-                        pointHoverRadius: 8
+                    // 방출되는 부산물 입자들 (하늘색 원)
+                    for(let i = 0; i < 5; i++) {
+                        let px = cutX + ((mechTime * 40 + i * 30) % 160);
+                        let py = cy + Math.sin(mechTime * 5 + i) * 18;
+                        mechCtx.beginPath();
+                        mechCtx.arc(px, py, 4, 0, Math.PI * 2);
+                        mechCtx.fillStyle = '#38bdf8';
+                        mechCtx.fill();
                     }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                animation: { duration: 1000 },
-                scales: {
-                    y: { min: 0, max: 110, grid: { color: '#334155' }, ticks: { color: '#cbd5e1' } },
-                    x: { grid: { color: '#334155' }, ticks: { color: '#cbd5e1' } }
-                },
-                plugins: { legend: { labels: { color: '#f8fafc', font: { size: 12 } } } }
+
+                    // 텍스트 라벨
+                    mechCtx.fillStyle = '#4ade80'; 
+                    mechCtx.font = 'bold 12px sans-serif';
+                    mechCtx.fillText('PET 고분자 (C-O 결합)', petStartX + 20, cy - 30);
+                    
+                    mechCtx.fillStyle = '#ef4444'; 
+                    mechCtx.font = 'bold 12px sans-serif';
+                    mechCtx.fillText('✂️ 선택적 가수분해', cutX - 25, cy + 40);
+
+                    requestAnimationFrame(drawMechanism);
+                }
+                
+                drawMechanism();
             }
         });
-
-        document.getElementById('tempSlider').addEventListener('input', (e) => {
-            const val = parseInt(e.target.value);
-            document.getElementById('tempVal').innerText = val;
-            
-            // 온도 슬라이더 변경 시 포인트 크기 실시간 변경 애니메이션 효과
-            const closestIdx = temps.reduce((prev, curr, idx) => Math.abs(curr - val) < Math.abs(temps[prev] - val) ? idx : prev, 0);
-            
-            tempChart.data.datasets[0].pointRadius = temps.map((_, i) => i === closestIdx ? 10 : 4);
-            tempChart.data.datasets[1].pointRadius = temps.map((_, i) => i === closestIdx ? 10 : 4);
-            tempChart.update('none');
-        });
-
-        // --- 3. 모듈 3: 실시간 동적 나노자임 메커니즘 캔버스 ---
-        const mechCanvas = document.getElementById('mechCanvas');
-        const mechCtx = mechCanvas.getContext('2d');
-        let mechTime = 0;
-
-        function drawMechanism() {
-            mechTime += 0.04;
-            mechCtx.clearRect(0, 0, mechCanvas.width, mechCanvas.height);
-
-            // 1. 초분자 포켓
-            mechCtx.strokeStyle = '#c084fc'; mechCtx.lineWidth = 4;
-            mechCtx.beginPath();
-            mechCtx.arc(150, 100, 50, 0.4 * Math.PI, 1.6 * Math.PI);
-            mechCtx.stroke();
-            
-            mechCtx.fillStyle = '#c084fc'; mechCtx.font = 'bold 12px sans-serif';
-            mechCtx.fillText('초분자 인식 포켓 (Host-Guest)', 60, 30);
-
-            // 2. 클릭 링커 & M-N4 SAC
-            mechCtx.fillStyle = '#38bdf8'; mechCtx.fillRect(200, 95, 45, 10);
-            mechCtx.fillStyle = '#cbd5e1'; mechCtx.font = '11px sans-serif';
-            mechCtx.fillText('Triazole (Click Linker)', 180, 80);
-
-            // 단일원자 금속 중심 (펄스 애니메이션)
-            let metalR = 18 + Math.sin(mechTime * 2) * 2;
-            mechCtx.beginPath();
-            mechCtx.arc(260, 100, metalR, 0, Math.PI * 2);
-            mechCtx.fillStyle = '#f59e0b';
-            mechCtx.shadowBlur = 12;
-            mechCtx.shadowColor = '#f59e0b';
-            mechCtx.fill();
-            mechCtx.shadowBlur = 0;
-            
-            mechCtx.fillStyle = '#000'; mechCtx.font = 'bold 11px sans-serif';
-            mechCtx.fillText('M-N4 SAC', 237, 104);
-
-            // 3. PET 고분자 기질 포집 & 반응 애니메이션
-            let petX = 310 + Math.sin(mechTime) * 10;
-            mechCtx.strokeStyle = '#4ade80'; mechCtx.lineWidth = 4;
-            mechCtx.beginPath();
-            mechCtx.moveTo(petX, 100);
-            mechCtx.lineTo(petX + 100, 100);
-            mechCtx.stroke();
-
-            // 에스터 결합 절단 부위 (가수분해 번개/절단 효과)
-            let cutX = petX + 45;
-            mechCtx.strokeStyle = '#ef4444'; mechCtx.lineWidth = 2.5;
-            mechCtx.beginPath();
-            mechCtx.moveTo(cutX - 5, 80);
-            mechCtx.lineTo(cutX + 5, 120);
-            mechCtx.stroke();
-
-            // 생성물(TPA/EG) 분출 입자
-            for(let i = 0; i < 3; i++) {
-                let px = cutX + (mechTime * 20 + i * 25) % 80;
-                let py = 100 + Math.sin(mechTime * 3 + i) * 15;
-                mechCtx.beginPath();
-                mechCtx.arc(px, py, 3, 0, Math.PI * 2);
-                mechCtx.fillStyle = '#67e8f9';
-                mechCtx.fill();
-            }
-
-            mechCtx.fillStyle = '#4ade80'; mechCtx.font = 'bold 12px sans-serif';
-            mechCtx.fillText('PET 고분자 (에스터 결합 C-O)', 310, 60);
-            mechCtx.fillStyle = '#ef4444';
-            mechCtx.fillText('✂️ 선택적 가수분해 절단', 305, 140);
-
-            requestAnimationFrame(drawMechanism);
-        }
-        drawMechanism();
     </script>
 </body>
 </html>
